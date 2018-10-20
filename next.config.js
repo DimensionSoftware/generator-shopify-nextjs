@@ -1,9 +1,10 @@
 // next.config.js
 const
   nextEnv        = require('next-env'),
-  dotenvLoad     = require('dotenv-load')
+  dotenvLoad     = require('dotenv-load'),
+  withCSS = require('@zeit/next-css')
 
 dotenvLoad()
 
 const withNextEnv = nextEnv({})
-module.exports = withNextEnv({})
+module.exports = withCSS(withNextEnv({}))
