@@ -9,10 +9,12 @@
   "dependencies": {
     "@shopify/koa-shopify-auth": "^3.1.5",
     "@shopify/koa-shopify-graphql-proxy": "^2.1.2",
+    "dotenv-load": "^1.1.0",
     "koa": "^2.0.1",
     "koa-router": "^7.1.0",
     "koa-session": "^5.9.0",
     "next": "latest",
+    "next-env": "^1.0.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   }
