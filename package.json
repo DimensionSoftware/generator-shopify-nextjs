@@ -7,6 +7,7 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "@shopify/koa-shopify-auth": "^3.1.5",
     "koa": "^2.0.1",
     "koa-router": "^7.1.0",
     "next": "latest",
