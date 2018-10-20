@@ -1,3 +1,5 @@
+require('isomorphic-fetch')
+
 const shopifyAuth = require('@shopify/koa-shopify-auth').default
 
 const Koa = require('koa')

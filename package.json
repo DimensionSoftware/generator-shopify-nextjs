@@ -10,6 +10,7 @@
     "@shopify/koa-shopify-auth": "^3.1.5",
     "@shopify/koa-shopify-graphql-proxy": "^2.1.2",
     "dotenv-load": "^1.1.0",
+    "isomorphic-fetch": "^2.2.1",
     "koa": "^2.0.1",
     "koa-router": "^7.1.0",
     "koa-session": "^5.9.0",
