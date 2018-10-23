@@ -4,9 +4,11 @@ import { Page, AppProvider } from '@shopify/polaris'
 
 import '@shopify/polaris/styles.css'
 
+global.isClient = typeof(window) !== 'undefined'
+
 class App extends Component {
   render() {
-    const { apiKey, shopOrigin } = typeof(window) !== 'undefined' ? window : { apiKey: '', shopOrigin: '' }
+    const { apiKey, shopOrigin } = isClient ? window : { apiKey: '', shopOrigin: '' }
 
     return (
       <AppProvider shopOrigin={shopOrigin} apiKey={apiKey}>
