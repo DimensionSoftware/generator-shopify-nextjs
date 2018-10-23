@@ -24,13 +24,19 @@ export const allShopsQueryVars = {
 export default function ShopList () {
   return (
     <Query query={allShopsQuery} variables={allShopsQueryVars}>
-      {({ loading, error, data: { allShops, _allShopsMeta }, fetchMore }) => {
-        if (error) return <h1>Error loading shops.</h1>
+      {({ loading, error, data, fetchMore }) => {
+        if (error) return <h1>Error loading shops: {error}</h1>
         if (loading) return <div>Loading</div>
+        const
+          allShops = data.allShops || [],
+          _allShopsMeta = data._allShopsMeta || {count: 0}
 
         const areMoreShops = allShops.length < _allShopsMeta.count
         return (
-          <Page>
+          <Page
+            title="My application"
+            breadcrumbs={[{ content: 'Home', url: '/' }]}
+            >
             <h2>Shops</h2>
             <ul>
               {allShops.map((post, ndx) => (

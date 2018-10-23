@@ -1,8 +1,9 @@
 import App, {Container} from 'next/app'
 import React from 'react'
 import withApolloClient from '../lib/with-apollo-client'
-import { Page, AppProvider } from '@shopify/polaris'
 import { ApolloProvider } from 'react-apollo'
+import { Page, AppProvider } from '@shopify/polaris'
+import '@shopify/polaris/styles.css'
 
 global.isClient = typeof(window) !== 'undefined'
 

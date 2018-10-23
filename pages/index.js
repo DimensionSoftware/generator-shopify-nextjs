@@ -1,14 +1,13 @@
 import Link from 'next/link'
 import React, { Component } from 'react'
 import { ApolloProvider, ApolloClient, createNetworkInterface } from 'react-apollo'
-import '@shopify/polaris/styles.css'
+import { Page } from '@shopify/polaris'
 
 class App extends Component {
   render() {
     return (
         <Page
           title="My application"
-          breadcrumbs={[{ content: 'Home', url: '/' }]}
           primaryAction={{ content: 'TODO' }}
           >
           <ul>
