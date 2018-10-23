@@ -1,4 +1,5 @@
-require('isomorphic-fetch')
+if (!process.browser) // polyfill
+  global.fetch = require('isomorphic-unfetch')
 
 const shopifyAuth = require('@shopify/koa-shopify-auth').default
 
