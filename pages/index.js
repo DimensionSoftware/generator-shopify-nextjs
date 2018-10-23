@@ -1,30 +1,24 @@
 import Link from 'next/link'
 import React, { Component } from 'react'
-import { Page, AppProvider } from '@shopify/polaris'
-
+import { ApolloProvider, ApolloClient, createNetworkInterface } from 'react-apollo'
 import '@shopify/polaris/styles.css'
-
-global.isClient = typeof(window) !== 'undefined'
 
 class App extends Component {
   render() {
-    const { apiKey, shopOrigin } = isClient ? window : { apiKey: '', shopOrigin: '' }
-
     return (
-      <AppProvider shopOrigin={shopOrigin} apiKey={apiKey}>
         <Page
           title="My application"
-          breadcrumbs={[{ content: 'Home', url: '/a' }]}
-          primaryAction={{ content: 'Add something' }}
+          breadcrumbs={[{ content: 'Home', url: '/' }]}
+          primaryAction={{ content: 'TODO' }}
           >
           <ul>
+            <li><Link href='/shops'><a>Shops</a></Link></li>
             <li><Link href='/b' as='/a'><a>a</a></Link></li>
             <li><Link href='/a' as='/b'><a>b</a></Link></li>
           </ul>
         </Page>
-      </AppProvider>
     )
   }
 }
 
-export default App
+export default props => (<App />)
