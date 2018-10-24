@@ -1,0 +1,8 @@
+type Shop @model {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+
+  domain: String! @unique
+  accessToken: String!
+}
