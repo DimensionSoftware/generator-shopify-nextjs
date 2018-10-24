@@ -8,7 +8,7 @@ class App extends Component {
     return (
         <Page
           title="My application"
-          primaryAction={{ content: 'TODO' }}
+          primaryAction={{ url: '/shops', content: 'Create Shop' }}
           >
           <ul>
             <li><Link href='/shops'><a>Shops</a></Link></li>
