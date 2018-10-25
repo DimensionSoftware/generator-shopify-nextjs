@@ -12,6 +12,8 @@ const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
+const initApollo = require('./lib/init-apollo')
+const gql = require('graphql-tag').default
 
 app
   .prepare()
@@ -33,14 +35,61 @@ app
         scopes: ['write_orders, write_products'],
         // callback for when auth is completed
         afterAuth(ctx) {
-          const {shop, accessToken} = ctx.session;
-
-          console.log('We did it!', accessToken);
-
-          ctx.redirect('/');
+          // add/install shop
+          const
+            {shop, accessToken} = ctx.session,
+            client = initApollo()
+          client.mutate({
+            mutation: gql`
+              mutation upsertShop($domain: String!, $accessToken: String!) {
+                upsertShop(
+                  where: {
+                    domain: $domain
+                  }
+                  create: {
+                    accessToken: $accessToken
+                    domain: $domain
+                  }
+                  update: {
+                    accessToken: $accessToken
+                  }
+                ) {
+                  id
+                  domain
+                  accessToken
+                  createdAt
+                }
+              }
+            `,
+            variables: { domain: shop, accessToken }
+          })
+          ctx.redirect('/')
         },
       })
     )
+
+    router.get('/shopify/uninstall', async ctx => {
+      // delete/uninstall shop
+      const {shop, accessToken} = ctx.session
+      client.mutate({
+        mutation: gql`
+          mutation deleteStore($domain: String!) {
+            deleteStore(
+              where: {
+                domain: $domain
+              }
+            ) {
+              id
+              domain
+              accessToken
+              createdAt
+            }
+          }
+        `,
+        variables: { domain: shop, accessToken }
+      })
+      ctx.redirect('/')
+    })
 
     router.get('/a', async ctx => {
       await app.render(ctx.req, ctx.res, '/b', ctx.query)
