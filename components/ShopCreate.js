@@ -1,3 +1,6 @@
+// XXX what follows is an _example_ wiring up a mutation
+// - upserting Shops directly does not make sense
+
 import { ApolloConsumer } from 'react-apollo'
 import gql from 'graphql-tag'
 import { allShopsQuery, allShopsQueryVars } from './ShopList'
@@ -39,7 +42,6 @@ function handleCreate (event, client) {
     `,
     variables: { domain, accessToken },
     update: (proxy, { data: { createShop } }) => {
-      console.log('update!!', createShop)
       const data = proxy.readQuery({
         query: allShopsQuery,
         variables: allShopsQueryVars

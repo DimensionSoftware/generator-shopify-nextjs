@@ -1,6 +1,6 @@
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Page } from '@shopify/polaris'
+import { TextStyle, Heading, Page, Card, ResourceList } from '@shopify/polaris'
 import ShopCreate from './ShopCreate'
 
 export const allShopsQuery = gql`
@@ -22,7 +22,7 @@ export const allShopsQueryVars = {
   first: 10
 }
 
-export default function ShopList () {
+export default function ShopList() {
   return (
     <Query query={allShopsQuery} variables={allShopsQueryVars}>
       {({ loading, error, data, fetchMore }) => {
@@ -38,15 +38,23 @@ export default function ShopList () {
             title="My application"
             breadcrumbs={[{ content: 'Home', url: '/' }]}
             >
-            <h2>Shops List</h2>
-            <ul>
-              {allShops.length && allShops.map((shop, ndx) => (
-                <li key={shop.id}>
-                  <span>{shop.domain}</span>
-                  <span>{shop.accessToken}</span>
-                </li>
-              )) || '( empty list )'}
-            </ul>
+            <Heading>Shops List</Heading>
+            <Card>
+              <ResourceList
+                items={allShops}
+                renderItem={shop =>
+                  <ResourceList.Item
+                    id={shop.id}
+                    accessibilityLabel={`Details for ${shop.domain} ${shop.id}`}
+                    >
+                    <h3>
+                      <TextStyle variation="strong">{shop.domain}</TextStyle>
+                    </h3>
+                    <div>{shop.accessToken}</div>
+                  </ResourceList.Item>
+                }>
+              </ResourceList>
+            </Card>
             {areMoreShops ? (
               <button onClick={() => loadMoreShops(allShops, fetchMore)}>
                 {' '}
@@ -55,7 +63,6 @@ export default function ShopList () {
             ) : (
               ''
             )}
-            <ShopCreate />
           </Page>
         )
       }}
@@ -63,7 +70,7 @@ export default function ShopList () {
   )
 }
 
-function loadMoreShops (allShops, fetchMore) {
+function loadMoreShops(allShops, fetchMore) {
   fetchMore({
     variables: {
       skip: allShops.length
