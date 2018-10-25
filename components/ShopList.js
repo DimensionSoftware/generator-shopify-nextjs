@@ -4,15 +4,19 @@ import { TextStyle, Heading, Page, Card, ResourceList } from '@shopify/polaris'
 import ShopCreate from './ShopCreate'
 
 export const allShopsQuery = gql`
-  query allShops($first: Int!, $skip: Int!) {
-    allShops(orderBy: createdAt_DESC, first: $first, skip: $skip) {
-      id
-      domain
-      accessToken
-      createdAt
-    }
-    _allShopsMeta {
-      count
+  query ($first: Int!, $skip: Int!) {
+    shopsConnection(orderBy: createdAt_DESC, first: $first, skip: $skip) {
+      edges {
+        node {
+          id
+          domain
+          accessToken
+          createdAt
+        }
+      }
+      aggregate {
+        count
+      }
     }
   }
 `
