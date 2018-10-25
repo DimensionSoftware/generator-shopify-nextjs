@@ -11,7 +11,7 @@ class App extends Component {
           primaryAction={{ url: '/shops', content: 'List Shops' }}
           >
           <ul>
-            <li><Link href='/shops'><a>List Shops</a></Link></li>
+            <li><Link prefetch href='/shops'><a>List Shops</a></Link></li>
             <li><Link href='/b' as='/a'><a>a</a></Link></li>
             <li><Link href='/a' as='/b'><a>b</a></Link></li>
           </ul>

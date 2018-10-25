@@ -28,7 +28,6 @@ export default function ShopList() {
       {({ loading, error, data, fetchMore }) => {
         // guards
         if (error) return <h1>Error loading shops: {error}</h1>
-        if (loading) return <div>Loading</div>
         const
           allShops = data.allShops || [],
           _allShopsMeta = data._allShopsMeta || {count: 0},
@@ -40,20 +39,22 @@ export default function ShopList() {
             >
             <Heading>Shops List</Heading>
             <Card>
-              <ResourceList
-                items={allShops}
-                renderItem={shop =>
-                  <ResourceList.Item
-                    id={shop.id}
-                    accessibilityLabel={`Details for ${shop.domain} ${shop.id}`}
-                    >
-                    <h3>
-                      <TextStyle variation="strong">{shop.domain}</TextStyle>
-                    </h3>
-                    <div>{shop.accessToken}</div>
-                  </ResourceList.Item>
-                }>
-              </ResourceList>
+              {loading
+                ? <div>Loading</div>
+                : <ResourceList
+                  items={allShops}
+                  renderItem={shop =>
+                    <ResourceList.Item
+                      id={shop.id}
+                      accessibilityLabel={`Details for ${shop.domain} ${shop.id}`}
+                      >
+                      <h3>
+                        <TextStyle variation="strong">{shop.domain}</TextStyle>
+                      </h3>
+                      <div>{shop.accessToken}</div>
+                    </ResourceList.Item>
+                  }>
+                </ResourceList>}
             </Card>
             {areMoreShops ? (
               <button onClick={() => loadMoreShops(allShops, fetchMore)}>
