@@ -10,9 +10,8 @@ export default (App) => {
       const { Component, router } = ctx
 
       let appProps = {}
-      if (App.getInitialProps) {
+      if (App.getInitialProps)
         appProps = await App.getInitialProps(ctx)
-      }
 
       // Run all GraphQL queries in the component tree
       // and extract the resulting data

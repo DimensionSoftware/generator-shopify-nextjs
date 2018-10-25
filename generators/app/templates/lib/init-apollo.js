@@ -1,6 +1,6 @@
 const
   { ApolloClient, InMemoryCache, HttpLink } = require('apollo-boost'),
-  fetch = require('isomorphic-unfetch').default
+  fetch = require('isomorphic-unfetch')
 
 let apolloClient = null
 
