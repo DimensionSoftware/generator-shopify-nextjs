@@ -1,35 +1,25 @@
 'use strict';
 const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
+// Const chalk = require('chalk');
+// const yosay = require('yosay');
 
 module.exports = class extends Generator {
-  prompting() {
-    // Have Yeoman greet the user.
-    this.log(
-      yosay(`Welcome to the stupendous ${chalk.red('generator-shopify-nextjs')} generator!`)
-    );
-
-    const prompts = [
-      {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
-      }
-    ];
-
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
-  }
-
   writing() {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
+    const files = [
+      'bin',
+      'components',
+      'data',
+      'lib',
+      'pages',
+      'LICENSE',
+      'next.config.js',
+      'package.json',
+      'README.md',
+      'server.js'
+    ];
+    files.forEach(f => {
+      this.fs.copy(this.templatePath(f), this.destinationPath(f));
+    });
   }
 
   install() {
