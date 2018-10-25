@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { TextStyle, Heading, Page, Card, ResourceList } from '@shopify/polaris'
 import ShopCreate from './ShopCreate'
 
-export const allShopsQuery = gql`
+export const shopsQuery = gql`
   query ($first: Int!, $skip: Int!) {
     shopsConnection(orderBy: createdAt_DESC, first: $first, skip: $skip) {
       edges {
@@ -21,21 +21,21 @@ export const allShopsQuery = gql`
   }
 `
 
-export const allShopsQueryVars = {
+export const shopsQueryVars = {
   skip: 0,
   first: 10
 }
 
 export default function ShopList() {
   return (
-    <Query query={allShopsQuery} variables={allShopsQueryVars}>
+    <Query query={shopsQuery} variables={shopsQueryVars}>
       {({ loading, error, data, fetchMore }) => {
         // guards
         if (error) return <h1>Error loading shops: {error}</h1>
         const
-          allShops = data.allShops || [],
-          _allShopsMeta = data._allShopsMeta || {count: 0},
-          areMoreShops = allShops.length < _allShopsMeta.count
+          shops = data.shopsConnection.edges.map(n => n.node) || [],
+          aggregate = data.aggregate || {count: 0},
+          areMoreShops = shops.length < aggregate.count
         return (
           <Page
             title="My application"
@@ -46,7 +46,7 @@ export default function ShopList() {
               {loading
                 ? <div>Loading</div>
                 : <ResourceList
-                  items={allShops}
+                  items={shops}
                   renderItem={shop =>
                     <ResourceList.Item
                       id={shop.id}
@@ -61,7 +61,7 @@ export default function ShopList() {
                 </ResourceList>}
             </Card>
             {areMoreShops ? (
-              <button onClick={() => loadMoreShops(allShops, fetchMore)}>
+              <button onClick={() => loadMoreShops(shops, fetchMore)}>
                 {' '}
                 {loading ? 'Loading...' : 'Show More'}{' '}
               </button>
@@ -75,16 +75,16 @@ export default function ShopList() {
   )
 }
 
-function loadMoreShops(allShops, fetchMore) {
+function loadMoreShops(shops, fetchMore) {
   fetchMore({
     variables: {
-      skip: allShops.length
+      skip: shops.length
     },
     updateQuery: (previousResult, { fetchMoreResult }) => {
       if (!fetchMoreResult) return previousResult
       return Object.assign({}, previousResult, {
         // Append the new shops results to the old one
-        allShops: [...previousResult.allShops, ...fetchMoreResult.allShops]
+        shops: [...previousResult.shops, ...fetchMoreResult.shops]
       })
     }
   })
