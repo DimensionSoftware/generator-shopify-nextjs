@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "John BEPPU",
+      "authorEmail": "john.beppu@gmail.com",
+      "authorUrl": "https://beppu.github.io/"
+    }
+  }
+}
