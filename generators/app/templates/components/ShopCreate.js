@@ -3,7 +3,7 @@
 
 import { ApolloConsumer } from 'react-apollo'
 import gql from 'graphql-tag'
-import { allShopsQuery, allShopsQueryVars } from './ShopList'
+import { shopsQuery, shopsQueryVars } from './ShopList'
 
 export default function ShopCreate () {
   return (
@@ -43,16 +43,16 @@ function handleCreate (event, client) {
     variables: { domain, accessToken },
     update: (proxy, { data: { createShop } }) => {
       const data = proxy.readQuery({
-        query: allShopsQuery,
-        variables: allShopsQueryVars
+        query: shopsQuery,
+        variables: shopsQueryVars
       })
       proxy.writeQuery({
-        query: allShopsQuery,
+        query: shopsQuery,
         data: {
           ...data,
-          allShops: [createShop, ...data.allShops]
+          shops: [createShop, ...data.shops]
         },
-        variables: allShopsQueryVars
+        variables: shopsQueryVars
       })
     }
   })
