@@ -13,7 +13,8 @@ npm install -g generator-shopify-nextjs
 Then generate your new project:
 
 ```bash
-yo shopify-nextjs
+cd /path/to/empty/directory
+yo shopify-nextjs name-of-app
 ```
 
 ## Getting To Know Yeoman
