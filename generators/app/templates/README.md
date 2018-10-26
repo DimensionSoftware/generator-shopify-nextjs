@@ -1,4 +1,4 @@
-# Your New Shopify App
+# Shopify App: <%= name %>
 
 ## The Stack
 
@@ -47,7 +47,13 @@ GRAPHQL_URI=...
 
 ## Deployment
 
-```
+```sh
 npm i -g now
 now
+```
+
+## REPL
+
+```sh
+bin/repl
 ```

@@ -1,9 +1,19 @@
 'use strict';
 const Generator = require('yeoman-generator');
-// Const chalk = require('chalk');
-// const yosay = require('yosay');
+/* // const chalk = require('chalk'); */
+const yosay = require('yosay');
 
 module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+    this.argument('name', { type: String, required: false });
+
+    if (!this.options.name) {
+      this.options.name = 'app';
+    }
+    console.log(yosay(`Generating a shopify-nextjs app named ${this.options.name}`));
+  }
+
   writing() {
     const files = [
       'bin',
@@ -13,12 +23,18 @@ module.exports = class extends Generator {
       'pages',
       'LICENSE',
       'next.config.js',
-      'package.json',
-      'README.md',
-      'server.js'
+      'server.js',
+      '.repl.js',
+      '.gitignore'
     ];
+
+    const templates = ['README.md', 'package.json'];
+
     files.forEach(f => {
       this.fs.copy(this.templatePath(f), this.destinationPath(f));
+    });
+    templates.forEach(t => {
+      this.fs.copyTpl(this.templatePath(t), this.destinationPath(t), this.options);
     });
   }
 
