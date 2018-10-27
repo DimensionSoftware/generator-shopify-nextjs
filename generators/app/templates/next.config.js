@@ -6,6 +6,8 @@ const
 
 // load & use dotenv
 dotenvLoad()
-const withNextEnv = nextEnv({})
+const withNextEnv = nextEnv({
+  // TODO custom config
+})
 
-module.exports = withCSS(withNextEnv({}))
+module.exports = withNextEnv(withCSS({}))
