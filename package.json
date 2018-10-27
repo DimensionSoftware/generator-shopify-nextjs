@@ -1,12 +1,12 @@
 {
   "name": "generator-shopify-nextjs",
-  "version": "0.0.0",
-  "description": "A yeoman generator for Shopify apps using next.js, koa, and polaris",
+  "version": "0.0.1",
+  "description": "A Yeoman generator for Shopify apps using Next.js, Koa, Prisma GraphQL & Shopify's Polaris",
   "homepage": "https://github.com/DimensionSoftware/generator-shopify-nextjs",
   "author": {
-    "name": "John BEPPU",
-    "email": "john.beppu@gmail.com",
-    "url": "https://beppu.github.io/"
+    "name": "Dimension Software",
+    "email": "tech@dimensionsoftware.com",
+    "url": "https://dimensionsoftware.com"
   },
   "files": [
     "generators"
@@ -20,6 +20,7 @@
     "koa",
     "polaris",
     "prisma",
+    "graphql",
     "yeoman-generator"
   ],
   "devDependencies": {
