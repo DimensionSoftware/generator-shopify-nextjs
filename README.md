@@ -1,5 +1,5 @@
 # generator-shopify-nextjs [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> A yeoman generator for Shopify apps using next.js, koa, and polaris
+> A Yeoman generator for Shopify apps using Next.js, Koa, Prisma GraphQL & Shopify's Polaris
 
 ## Installation
 
@@ -26,7 +26,7 @@ yo shopify-nextjs name-of-app
 
 ## License
 
-MIT © [John BEPPU](https://beppu.github.io/)
+MIT © [Dimension Software](https://dimensionsoftware.com)
 
 
 [npm-image]: https://badge.fury.io/js/generator-shopify-nextjs.svg
