@@ -20,6 +20,7 @@ app
   .then(() => {
     const server = new Koa()
     const router = new Router()
+    server.keys = [ 'secret' ]
     server
       .use(session(server))
       .use(shopifyAuth({
