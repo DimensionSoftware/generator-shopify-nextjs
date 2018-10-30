@@ -31,7 +31,7 @@ export default function ShopList() {
     <Query query={shopsQuery} variables={shopsQueryVars}>
       {({ loading, error, data, fetchMore }) => {
         // guards
-        if (error) return <h1>Error loading shops: {error}</h1>
+        if (error || !data.shopsConnection) return <h1>Error loading shops: {error}</h1>
         const
           shops = data.shopsConnection.edges.map(n => n.node) || [],
           aggregate = data.aggregate || {count: 0},
