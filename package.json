@@ -1,6 +1,6 @@
 {
   "name": "generator-shopify-nextjs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Yeoman generator for Shopify apps using Next.js, Koa, Prisma GraphQL & Shopify's Polaris",
   "homepage": "https://github.com/DimensionSoftware/generator-shopify-nextjs",
   "author": {
