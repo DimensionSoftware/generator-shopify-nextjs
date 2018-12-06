@@ -24,8 +24,7 @@ module.exports = class extends Generator {
       'LICENSE',
       'next.config.js',
       'server.js',
-      '.repl.js',
-      '.gitignore'
+      '.repl.js'
     ];
 
     const templates = ['README.md', 'package.json'];
@@ -33,6 +32,7 @@ module.exports = class extends Generator {
     files.forEach(f => {
       this.fs.copy(this.templatePath(f), this.destinationPath(f));
     });
+    this.fs.copy(this.templatePath('.npmignore'), this.destinationPath('.gitignore'));
     templates.forEach(t => {
       this.fs.copyTpl(this.templatePath(t), this.destinationPath(t), this.options);
     });
