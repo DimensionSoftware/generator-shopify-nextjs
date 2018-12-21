@@ -71,7 +71,9 @@ app
 
     router.get('/shopify/uninstall', async ctx => {
       // delete/uninstall shop
-      const {shop, accessToken} = ctx.session
+      const
+        {shop, accessToken} = ctx.session,
+        client              = initApollo()
       client.mutate({
         mutation: gql`
           mutation deleteStore($domain: String!) {
